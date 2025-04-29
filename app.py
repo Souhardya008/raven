@@ -20,7 +20,8 @@ def index():
 
     for line in lines:
         parts = line.split('|')
-        if len(parts) < 4: continue
+        if len(parts) < 4:
+            continue
         user_id = parts[0].replace("UserID:", "").strip()
         time = parts[1].strip()
         stars = int(parts[2].replace("Stars:", "").strip())
@@ -53,14 +54,13 @@ def add_vouch():
 
     timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     vouch_entry = f"UserID:{user_id} | {timestamp} | Stars:{stars} | Message:\"{msg}\"\n"
-    
-    # Append the new vouch to the file
+
     with open(VOUCH_FILE, 'a') as f:
         f.write(vouch_entry)
-    
+
     return jsonify({"success": True}), 201
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    port = int(os.environ.get("PORT", 5000))  # Required for Render
+    app.run(host='0.0.0.0', port=port, debug=True)
 
