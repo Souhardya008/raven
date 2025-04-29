@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 import os
+import datetime
 
 app = Flask(__name__)
 
@@ -40,9 +41,26 @@ def index():
 
     return render_template('index.html', stats=stats, vouches=vouches)
 
-# Start the app here
+@app.route('/api/vouches', methods=['POST'])
+def add_vouch():
+    data = request.json
+    user_id = data.get('user_id')
+    stars = data.get('stars')
+    msg = data.get('msg')
+
+    if not user_id or not stars or not msg:
+        return jsonify({"error": "Missing required fields"}), 400
+
+    timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    vouch_entry = f"UserID:{user_id} | {timestamp} | Stars:{stars} | Message:\"{msg}\"\n"
+    
+    # Append the new vouch to the file
+    with open(VOUCH_FILE, 'a') as f:
+        f.write(vouch_entry)
+    
+    return jsonify({"success": True}), 201
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Get the port from the environment variable
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(debug=True)
 
 
