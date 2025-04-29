@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RavenShop Reputation</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .star { color: gold; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <div class="container mx-auto p-4">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-bold">🛡️ RavenShop Reputation</h1>
+      <p class="text-gray-400 mt-2">Premium Services • Trusted Solutions • Fast Delivery</p>
+    </header>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Total Vouches</h2>
+        <p class="text-3xl mt-2" id="total-vouches">--</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Average Rating</h2>
+        <p class="text-3xl mt-2" id="average-rating">--</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold">Top Voucher</h2>
+        <p class="text-xl mt-2" id="top-voucher">--</p>
+      </div>
+    </section>
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+      <h2 class="text-2xl font-semibold mb-4">📝 Recent Vouches</h2>
+      <div id="vouches-list" class="space-y-4">
+        <!-- Vouches will be inserted here -->
+      </div>
+    </section>
+    <footer class="text-center text-gray-500 mt-10">
+      RavenShop • Excellence in Trust
+    </footer>
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("total-vouches").innerText = "{{ stats.total_vouches }}";
+    document.getElementById("average-rating").innerText = "{{ stats.average_rating }}/5 ⭐";
+    document.getElementById("top-voucher").innerText = "{{ stats.top_user }}";
+    const vouches = {{ vouches|tojson }};
+    const container = document.getElementById("vouches-list");
+    vouches.forEach(v => {
+      const div = document.createElement('div');
+      div.className = 'bg-gray-700 p-4 rounded shadow';
+      div.innerHTML = `<strong>${'⭐'.repeat(v.stars)}</strong> - ${v.msg}<br><small>By ${v.user_id} at ${v.time}</small>`;
+      container.appendChild(div);
+    });
+  });
+</script>
+
+</body>
+</html>
