@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template
 import os
 
@@ -41,5 +40,9 @@ def index():
 
     return render_template('index.html', stats=stats, vouches=vouches)
 
+# Start the app here
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Get the port from the environment variable
+    app.run(host='0.0.0.0', port=port, debug=True)
+
+
