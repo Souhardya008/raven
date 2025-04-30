@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, jsonify
 import os
 import datetime
@@ -7,7 +8,7 @@ app = Flask(__name__)
 VOUCH_FILE = 'ravenshop.txt'
 
 @app.route('/')
-def index():
+def home():
     if not os.path.exists(VOUCH_FILE):
         return render_template('index.html', stats={}, vouches=[])
 
@@ -28,9 +29,15 @@ def index():
         msg = parts[3].replace("Message:", "").strip().strip('"')
         stars_total += stars
         user_counts[user_id] = user_counts.get(user_id, 0) + 1
-        vouches.append({'user_id': user_id, 'time': time, 'stars': stars, 'msg': msg})
+        vouches.append({
+            'user_id': user_id,
+            'timestamp': time,
+            'stars': stars,
+            'message': msg,
+            'user_name': 'Anonymous',
+            'user_avatar': None
+        })
 
-    vouches = vouches[-5:][::-1]
     avg_rating = round(stars_total / len(lines), 2) if lines else 0
     top_user = max(user_counts, key=user_counts.get) if user_counts else "N/A"
 
@@ -40,7 +47,7 @@ def index():
         'top_user': top_user
     }
 
-    return render_template('index.html', stats=stats, vouches=vouches)
+    return render_template('index.html', recent_vouches=vouches, top_vouchers=[])
 
 @app.route('/api/vouches', methods=['POST'])
 def add_vouch():
@@ -61,6 +68,4 @@ def add_vouch():
     return jsonify({"success": True}), 201
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Required for Render
-    app.run(host='0.0.0.0', port=port, debug=True)
-
+    app.run(host='0.0.0.0', port=5000)
