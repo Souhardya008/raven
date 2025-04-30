@@ -183,6 +183,50 @@ def add_vouch():
 
     return jsonify({"success": True, "vouch_id": new_vouch.id}), 201
 
+@app.route('/api/vouches', methods=['GET'])
+def get_all_vouches():
+    """Get all vouches with pagination"""
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+    
+    # Get paginated vouches
+    vouches_pagination = Vouch.query.order_by(Vouch.timestamp.desc()).paginate(
+        page=page, per_page=per_page, error_out=False)
+    
+    vouches_list = []
+    for vouch in vouches_pagination.items:
+        user_data = get_discord_user(vouch.user_id)
+        vouches_list.append({
+            "id": vouch.id,
+            "user_id": vouch.user_id,
+            "username": user_data['username'],
+            "avatar_url": get_avatar_url(user_data),
+            "timestamp": vouch.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            "stars": vouch.stars,
+            "message": vouch.message
+        })
+    
+    return jsonify({
+        "vouches": vouches_list,
+        "total": vouches_pagination.total,
+        "pages": vouches_pagination.pages,
+        "current_page": page
+    })
+
+@app.route('/api/vouches/<int:vouch_id>', methods=['DELETE'])
+def delete_vouch(vouch_id):
+    """Delete a vouch by ID"""
+    # Add authentication here if needed
+    vouch = Vouch.query.get(vouch_id)
+    
+    if not vouch:
+        return jsonify({"error": "Vouch not found"}), 404
+    
+    db.session.delete(vouch)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": f"Vouch {vouch_id} deleted successfully"})
+
 @app.route('/migrate', methods=['GET'])
 def migrate_data():
     """One-time route to migrate data from text file to database"""
@@ -224,8 +268,6 @@ def migrate_data():
     
     db.session.commit()
     return jsonify({"success": True, "migrated_count": migrated_count})
-
-# New API endpoints for the Discord bot
 
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
