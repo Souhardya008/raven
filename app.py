@@ -47,7 +47,18 @@ def home():
         'top_user': top_user
     }
 
-    return render_template('index.html', recent_vouches=vouches, top_vouchers=[])
+    # Calculate top vouchers
+    top_vouchers_list = []
+    for user_id, count in sorted(user_counts.items(), key=lambda x: x[1], reverse=True)[:3]:
+        top_vouchers_list.append({
+            'user_id': user_id,
+            'discord_avatar_url': f'https://cdn.discordapp.com/avatars/{user_id}/{user_id}.png',
+            'vouch_count': count,
+            'score': count,
+            'currency': 'vouches'
+        })
+
+    return render_template('index.html', recent_vouches=vouches, top_vouchers=top_vouchers_list)
 
 @app.route('/api/vouches', methods=['POST'])
 def add_vouch():
