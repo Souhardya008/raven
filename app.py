@@ -8,8 +8,18 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
-# Configure Database
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+# Log environment variables for debugging (without showing sensitive values)
+print("Environment variables present:", list(os.environ.keys()))
+
+# Configure Database with fallback for local development
+database_url = os.environ.get("DATABASE_URL")
+if database_url:
+    print("Database URL found in environment")
+else:
+    print("No Database URL found in environment, using fallback")
+    database_url = "sqlite:///temp.db"  # Local fallback
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_recycle": 300,
     "pool_pre_ping": True,
