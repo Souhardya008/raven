@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { 
+        body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0a1a;
             color: #fff;
@@ -21,17 +21,18 @@
     </style>
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <img src="https://cdn.discordapp.com/attachments/1363921041411539266/1363936617537999048/file_000000004364622fa7f4d73af03964b4_conversation_id680683d9-451c-8004-8e32-f9a19178f62bmessage_id7ce5d84e-c61b-4a84-984b-5d036ef2e1c8.png" class="w-8 h-8" alt="Logo">
+                <img src="/assets/logo.png" class="w-8 h-8" alt="Logo"> <!-- Replace with your logo path -->
                 <span class="text-xl font-semibold">RavenShop</span>
             </div>
             <div class="flex items-center space-x-8">
                 <a href="#vouches" class="text-gray-300 hover:text-white transition">Vouches</a>
                 <a href="#stats" class="text-gray-300 hover:text-white transition">Stats</a>
-                <a href="discord.gg/ravenshop" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition">Join Discord</a>
+                <a href="https://discord.gg/ravenshop" target="_blank" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition">Join Discord</a>
             </div>
         </div>
     </nav>
@@ -47,42 +48,22 @@
     </div>
 
     <!-- Top Vouchers Section -->
-    <div class="container mx-auto px-6 py-16">
+    <div id="stats" class="container mx-auto px-6 py-16">
         <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Top Vouchers</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for voucher in top_vouchers %}
             <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
                 <div class="flex flex-col items-center text-center">
-                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=7e22ce&color=fff" class="w-20 h-20 rounded-full mb-4" alt="Avatar">
-                    <h3 class="font-semibold text-lg">john_doe</h3>
-                    <p class="text-gray-400 text-sm mb-3">6 vouches</p>
+                    <img src="{{ voucher.discord_avatar_url }}" class="w-20 h-20 rounded-full mb-4" alt="Avatar">
+                    <h3 class="font-semibold text-lg">{{ voucher.user_id }}</h3>
+                    <p class="text-gray-400 text-sm mb-3">{{ voucher.vouch_count }} vouches</p>
                     <div class="flex items-center space-x-2">
-                        <span class="font-bold text-xl">26</span>
-                        <span class="text-gray-400 text-sm">EG</span>
+                        <span class="font-bold text-xl">{{ voucher.score }}</span>
+                        <span class="text-gray-400 text-sm">{{ voucher.currency }}</span>
                     </div>
                 </div>
             </div>
-            <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
-                <div class="flex flex-col items-center text-center">
-                    <img src="https://ui-avatars.com/api/?name=Star+Fox&background=7e22ce&color=fff" class="w-20 h-20 rounded-full mb-4" alt="Avatar">
-                    <h3 class="font-semibold text-lg">StarFox</h3>
-                    <p class="text-gray-400 text-sm mb-3">5 vouches</p>
-                    <div class="flex items-center space-x-2">
-                        <span class="font-bold text-xl">4.8</span>
-                        <span class="text-gray-400 text-sm">EOS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
-                <div class="flex flex-col items-center text-center">
-                    <img src="https://ui-avatars.com/api/?name=Jane+D&background=7e22ce&color=fff" class="w-20 h-20 rounded-full mb-4" alt="Avatar">
-                    <h3 class="font-semibold text-lg">JaneD1987</h3>
-                    <p class="text-gray-400 text-sm mb-3">6 vouches</p>
-                    <div class="flex items-center space-x-2">
-                        <span class="font-bold text-xl">178</span>
-                        <span class="text-gray-400 text-sm">IO</span>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -90,7 +71,7 @@
     <div id="vouches" class="container mx-auto px-6 py-16">
         <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Recent Vouches</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for vouch in (recent_vouches|sort(attribute='timestamp', reverse=true))[:3] %}
+            {% for vouch in recent_vouches|sort(attribute='timestamp', reverse=true)[:3] %}
             <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
                 <div class="flex items-center space-x-4 mb-4">
                     <img src="{{ vouch.user_avatar or 'https://ui-avatars.com/api/?name=' + vouch.user_name }}" class="w-12 h-12 rounded-full" alt="User">
@@ -110,7 +91,8 @@
 
     <!-- Footer -->
     <footer class="py-8 text-center text-gray-400">
-        <p>© 2624 RavenShop • All rights reserved</p>
+        <p>© 2025 RavenShop • All rights reserved</p>
     </footer>
+
 </body>
 </html>
