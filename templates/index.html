@@ -90,7 +90,7 @@
     <div id="vouches" class="container mx-auto px-6 py-16">
         <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Recent Vouches</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for vouch in recent_vouches|sort(attribute='timestamp', reverse=true)[:3] %}
+            {% for vouch in (recent_vouches|sort(attribute='timestamp', reverse=true))[:3] %}
             <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
                 <div class="flex items-center space-x-4 mb-4">
                     <img src="{{ vouch.user_avatar or 'https://ui-avatars.com/api/?name=' + vouch.user_name }}" class="w-12 h-12 rounded-full" alt="User">
