@@ -181,7 +181,7 @@ def add_vouch():
     db.session.add(new_vouch)
     db.session.commit()
 
-    return jsonify({"success": True}), 201
+    return jsonify({"success": True, "vouch_id": new_vouch.id}), 201
 
 @app.route('/migrate', methods=['GET'])
 def migrate_data():
@@ -224,6 +224,61 @@ def migrate_data():
     
     db.session.commit()
     return jsonify({"success": True, "migrated_count": migrated_count})
+
+# New API endpoints for the Discord bot
+
+@app.route('/api/stats', methods=['GET'])
+def get_stats():
+    """Get basic statistics about vouches"""
+    vouches_db = Vouch.query.all()
+    
+    total_vouches = len(vouches_db)
+    stars_total = sum(vouch.stars for vouch in vouches_db)
+    avg_rating = round(stars_total / total_vouches, 2) if total_vouches else 0
+    
+    # Count vouches per user
+    user_counts = {}
+    for vouch in vouches_db:
+        user_id = vouch.user_id
+        user_counts[user_id] = user_counts.get(user_id, 0) + 1
+    
+    return jsonify({
+        "total_vouches": total_vouches,
+        "average_rating": avg_rating,
+        "user_count": len(user_counts)
+    })
+
+@app.route('/api/leaderboard', methods=['GET'])
+def get_leaderboard():
+    """Get leaderboard data - top users by vouch count"""
+    vouches_db = Vouch.query.all()
+    
+    # Count vouches per user
+    user_counts = {}
+    for vouch in vouches_db:
+        user_id = vouch.user_id
+        user_counts[user_id] = user_counts.get(user_id, 0) + 1
+    
+    # Sort and get top users (limit to top 10)
+    top_users = sorted(user_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+    
+    leaderboard_data = []
+    for user_id, count in top_users:
+        user_data = get_discord_user(user_id)
+        leaderboard_data.append({
+            "user_id": user_id,
+            "username": user_data['username'],
+            "avatar_url": get_avatar_url(user_data),
+            "vouch_count": count
+        })
+    
+    return jsonify({"leaderboard": leaderboard_data})
+
+@app.route('/api/count', methods=['GET'])
+def get_vouch_count():
+    """Simple endpoint to return the current vouch count"""
+    count = Vouch.query.count()
+    return jsonify({"count": count})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
