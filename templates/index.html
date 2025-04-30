@@ -1,61 +1,74 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RavenShop Reputation</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    .star { color: gold; }
-  </style>
-</head>
-<body class="bg-gray-900 text-white">
-  <div class="container mx-auto p-4">
-    <header class="text-center mb-10">
-      <h1 class="text-4xl font-bold">🛡️ RavenShop Reputation</h1>
-      <p class="text-gray-400 mt-2">Premium Services • Trusted Solutions • Fast Delivery</p>
-    </header>
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-        <h2 class="text-xl font-semibold">Total Vouches</h2>
-        <p class="text-3xl mt-2" id="total-vouches">--</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-        <h2 class="text-xl font-semibold">Average Rating</h2>
-        <p class="text-3xl mt-2" id="average-rating">--</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-        <h2 class="text-xl font-semibold">Top Voucher</h2>
-        <p class="text-xl mt-2" id="top-voucher">--</p>
-      </div>
-    </section>
-    <section class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
-      <h2 class="text-2xl font-semibold mb-4">📝 Recent Vouches</h2>
-      <div id="vouches-list" class="space-y-4">
-        <!-- Vouches will be inserted here -->
-      </div>
-    </section>
-    <footer class="text-center text-gray-500 mt-10">
-      RavenShop • Excellence in Trust
-    </footer>
-  </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("total-vouches").innerText = "{{ stats.total_vouches }}";
-    document.getElementById("average-rating").innerText = "{{ stats.average_rating }}/5 ⭐";
-    document.getElementById("top-voucher").innerText = "{{ stats.top_user }}";
-    const vouches = {{ vouches|tojson }};
-    const container = document.getElementById("vouches-list");
-    vouches.forEach(v => {
-      const div = document.createElement('div');
-      div.className = 'bg-gray-700 p-4 rounded shadow';
-      div.innerHTML = `<strong>${'⭐'.repeat(v.stars)}</strong> - ${v.msg}<br><small>By ${v.user_id} at ${v.time}</small>`;
-      container.appendChild(div);
-    });
-  });
-</script>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raven Vouches</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#7e22ce", // purple
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-base-100 text-base-content min-h-screen transition-all duration-300">
+
+    <div class="navbar bg-primary text-white">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl font-bold">🦅 RavenShop</a>
+        </div>
+        <div class="flex-none">
+            <label class="swap swap-rotate">
+                <input type="checkbox" id="theme-toggle" />
+                <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64 17.64A9 9 0 1 1 18.36 6.36 9 9 0 0 0 5.64 17.64z"/></svg>
+                <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </label>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-3">
+            <div class="stat bg-primary text-white rounded-xl shadow-lg p-4">
+                <div class="stat-title text-white/80">Total Vouches</div>
+                <div class="stat-value">{{ stats.total_vouches }}</div>
+            </div>
+            <div class="stat bg-primary text-white rounded-xl shadow-lg p-4">
+                <div class="stat-title text-white/80">Average Rating</div>
+                <div class="stat-value">{{ stats.average_rating }}⭐</div>
+            </div>
+            <div class="stat bg-primary text-white rounded-xl shadow-lg p-4">
+                <div class="stat-title text-white/80">Top Voucher</div>
+                <div class="stat-value">{{ stats.top_user }}</div>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-12 mb-4 text-primary">Recent Vouches</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {% for v in vouches %}
+            <div class="card shadow-md bg-base-200 p-4 rounded-xl">
+                <div class="font-bold text-primary mb-2">{{ v.user_id }}</div>
+                <div class="text-sm opacity-70">{{ v.time }}</div>
+                <div class="my-2">⭐ {{ v.stars }}</div>
+                <p class="text-base-content">{{ v.msg }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+      const toggle = document.getElementById("theme-toggle");
+      toggle.addEventListener("change", function () {
+        document.documentElement.setAttribute("data-theme", this.checked ? "dark" : "light");
+      });
+    </script>
 
 </body>
 </html>
