@@ -5,5 +5,15 @@ services:
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT"
     plan: free
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
     branches:
       - main
+  
+  - type: pserv
+    name: ravenshop-db
+    env: postgresql
+    plan: free
+    user: postgres
+    ipAllowList: []
