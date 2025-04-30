@@ -26,7 +26,7 @@
     <nav class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <img src="/assets/logo.png" class="w-8 h-8" alt="Logo"> <!-- Replace with your logo path -->
+                <img src="https://cdn.discordapp.com/attachments/1363921041411539266/1363936617537999048/file_000000004364622fa7f4d73af03964b4_conversation_id680683d9-451c-8004-8e32-f9a19178f62bmessage_id7ce5d84e-c61b-4a84-984b-5d036ef2e1c8.png" class="w-8 h-8" alt="Logo">
                 <span class="text-xl font-semibold">RavenShop</span>
             </div>
             <div class="flex items-center space-x-8">
@@ -71,7 +71,7 @@
     <div id="vouches" class="container mx-auto px-6 py-16">
         <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Recent Vouches</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for vouch in recent_vouches|sort(attribute='timestamp', reverse=true)[:3] %}
+            {% for vouch in (recent_vouches|sort(attribute='timestamp', reverse=true))[:3] %}
             <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
                 <div class="flex items-center space-x-4 mb-4">
                     <img src="{{ vouch.user_avatar or 'https://ui-avatars.com/api/?name=' + vouch.user_name }}" class="w-12 h-12 rounded-full" alt="User">
