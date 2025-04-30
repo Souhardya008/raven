@@ -1,74 +1,134 @@
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raven Vouches</title>
+    <title>RavenShop • Premium Services</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#7e22ce", // purple
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#7e22ce",
+                        secondary: "#9333ea",
+                        accent: "#a855f7"
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
             }
-          }
         }
-      }
     </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-effect { backdrop-filter: blur(10px); }
+        .gradient-text { background: linear-gradient(45deg, #7e22ce, #a855f7); -webkit-background-clip: text; color: transparent; }
+    </style>
 </head>
-<body class="bg-base-100 text-base-content min-h-screen transition-all duration-300">
+<body class="bg-[#0f0f1a] text-white min-h-screen">
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 pointer-events-none"></div>
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img src="https://cdn.discordapp.com/attachments/1363921041411539266/1363936617537999048/file_000000004364622fa7f4d73af03964b4_conversation_id680683d9-451c-8004-8e32-f9a19178f62bmessage_id7ce5d84e-c61b-4a84-984b-5d036ef2e1c8.png" class="w-10 h-10" alt="Logo">
+                    <span class="text-2xl font-bold gradient-text">RavenShop</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#vouches" class="hover:text-accent transition">Vouches</a>
+                    <a href="#stats" class="hover:text-accent transition">Stats</a>
+                    <a href="discord.gg/ravenshop" class="btn btn-primary">Join Discord</a>
+                </div>
+            </div>
+        </nav>
 
-    <div class="navbar bg-primary text-white">
-        <div class="flex-1">
-            <a class="btn btn-ghost text-xl font-bold">🦅 RavenShop</a>
-        </div>
-        <div class="flex-none">
-            <label class="swap swap-rotate">
-                <input type="checkbox" id="theme-toggle" />
-                <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64 17.64A9 9 0 1 1 18.36 6.36 9 9 0 0 0 5.64 17.64z"/></svg>
-                <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            </label>
+        <div class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-5xl font-bold mb-6 gradient-text">Premium Services & Trusted Solutions</h1>
+            <p class="text-xl text-gray-300 mb-8">24/7 Support • Fast Delivery • Professional Service</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#vouches" class="btn btn-primary btn-lg">View Vouches</a>
+                <a href="https://raven.shop" class="btn btn-outline btn-lg">Visit Shop</a>
+            </div>
         </div>
     </div>
 
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid gap-6 grid-cols-1 sm:grid-cols-3">
-            <div class="stat bg-primary text-white rounded-xl shadow-lg p-4">
-                <div class="stat-title text-white/80">Total Vouches</div>
-                <div class="stat-value">{{ stats.total_vouches }}</div>
+    <!-- Stats Section -->
+    <div id="stats" class="container mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gradient-to-br from-primary to-accent p-[2px] rounded-2xl">
+                <div class="bg-[#0f0f1a] p-6 rounded-2xl h-full">
+                    <h3 class="text-4xl font-bold mb-2">{{ stats.total_vouches }}</h3>
+                    <p class="text-gray-400">Total Vouches</p>
+                </div>
             </div>
-            <div class="stat bg-primary text-white rounded-xl shadow-lg p-4">
-                <div class="stat-title text-white/80">Average Rating</div>
-                <div class="stat-value">{{ stats.average_rating }}⭐</div>
+            <div class="bg-gradient-to-br from-primary to-accent p-[2px] rounded-2xl">
+                <div class="bg-[#0f0f1a] p-6 rounded-2xl h-full">
+                    <h3 class="text-4xl font-bold mb-2">{{ stats.average_rating }} ⭐</h3>
+                    <p class="text-gray-400">Average Rating</p>
+                </div>
             </div>
-            <div class="stat bg-primary text-white rounded-xl shadow-lg p-4">
-                <div class="stat-title text-white/80">Top Voucher</div>
-                <div class="stat-value">{{ stats.top_user }}</div>
+            <div class="bg-gradient-to-br from-primary to-accent p-[2px] rounded-2xl">
+                <div class="bg-[#0f0f1a] p-6 rounded-2xl h-full">
+                    <h3 class="text-4xl font-bold mb-2">{{ stats.unique_users }}</h3>
+                    <p class="text-gray-400">Unique Customers</p>
+                </div>
             </div>
         </div>
+    </div>
 
-        <h2 class="text-2xl font-semibold mt-12 mb-4 text-primary">Recent Vouches</h2>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {% for v in vouches %}
-            <div class="card shadow-md bg-base-200 p-4 rounded-xl">
-                <div class="font-bold text-primary mb-2">{{ v.user_id }}</div>
-                <div class="text-sm opacity-70">{{ v.time }}</div>
-                <div class="my-2">⭐ {{ v.stars }}</div>
-                <p class="text-base-content">{{ v.msg }}</p>
+    <!-- Top Vouchers Section -->
+    <div class="container mx-auto px-6 py-16">
+        <h2 class="text-3xl font-bold mb-12 gradient-text text-center">Top Vouchers</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for user in top_vouchers %}
+            <div class="bg-[#1a1a2e] rounded-xl p-6 transform hover:scale-105 transition">
+                <div class="flex items-center space-x-4">
+                    <img src="{{ user.avatar_url }}" class="w-16 h-16 rounded-full border-2 border-accent" alt="Avatar">
+                    <div>
+                        <h3 class="font-bold text-xl">{{ user.name }}</h3>
+                        <p class="text-gray-400">{{ user.vouch_count }} vouches</p>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 
-    <script>
-      const toggle = document.getElementById("theme-toggle");
-      toggle.addEventListener("change", function () {
-        document.documentElement.setAttribute("data-theme", this.checked ? "dark" : "light");
-      });
-    </script>
+    <!-- Recent Vouches Section -->
+    <div id="vouches" class="container mx-auto px-6 py-16">
+        <h2 class="text-3xl font-bold mb-12 gradient-text text-center">Recent Vouches</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for vouch in recent_vouches %}
+            <div class="bg-[#1a1a2e] rounded-xl p-6 hover:bg-[#1a1a2e]/80 transition">
+                <div class="flex items-center space-x-4 mb-4">
+                    <img src="{{ vouch.user_avatar }}" class="w-12 h-12 rounded-full" alt="User">
+                    <div>
+                        <h3 class="font-semibold">{{ vouch.user_name }}</h3>
+                        <p class="text-sm text-gray-400">{{ vouch.timestamp }}</p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {% for i in range(vouch.stars) %}
+                    <span class="text-yellow-400">⭐</span>
+                    {% endfor %}
+                </div>
+                <p class="text-gray-300">{{ vouch.message }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
+    <!-- Footer -->
+    <footer class="bg-[#1a1a2e] py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">© 2024 RavenShop • All rights reserved</p>
+        </div>
+    </footer>
 </body>
 </html>
