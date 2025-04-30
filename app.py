@@ -29,9 +29,10 @@ def home():
         msg = parts[3].replace("Message:", "").strip().strip('"')
         stars_total += stars
         user_counts[user_id] = user_counts.get(user_id, 0) + 1
-        avatar_hash = user_id  # Discord CDN requires avatar hash
-        avatar_url = f'https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.png'
-        user_name = user_id  # Display user ID if name not available
+        # Use default Discord avatar as fallback
+        avatar_url = f'https://cdn.discordapp.com/embed/avatars/{int(user_id) % 5}.png'
+        # Format username nicely
+        user_name = f'User {user_id[:6]}' if len(user_id) > 6 else f'User {user_id}'
         vouches.append({
             'user_id': user_id,
             'timestamp': time,
