@@ -29,13 +29,16 @@ def home():
         msg = parts[3].replace("Message:", "").strip().strip('"')
         stars_total += stars
         user_counts[user_id] = user_counts.get(user_id, 0) + 1
+        avatar_hash = user_id  # Discord CDN requires avatar hash
+        avatar_url = f'https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.png'
+        user_name = user_id  # Display user ID if name not available
         vouches.append({
             'user_id': user_id,
             'timestamp': time,
             'stars': stars,
             'message': msg,
-            'user_name': 'Anonymous',
-            'user_avatar': None
+            'user_name': user_name,
+            'user_avatar': avatar_url
         })
 
     avg_rating = round(stars_total / len(lines), 2) if lines else 0
