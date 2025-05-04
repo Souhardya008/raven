@@ -1,132 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RavenShop • Premium Services</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a1a;
-            color: #fff;
-        }
-        .gradient-text {
-            background: linear-gradient(45deg, #9333ea, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .avatar-wrapper {
-            overflow: hidden;
-            border-radius: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #1a1a2e;
-        }
-        .avatar-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .stars-container {
-            display: flex;
-            align-items: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RavenShop • Premium Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, #1e1e3f 0%, #0a0a1a 100%);
+      color: #fff;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #ec4899, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    .avatar-wrapper {
+      border-radius: 9999px;
+      overflow: hidden;
+      background-color: #1e1e3f;
+      box-shadow: 0 0 0 4px #4c1d95;
+    }
+    .avatar-image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    .glow-btn {
+      background: linear-gradient(to right, #9333ea, #e11d48);
+      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+    }
+    .hero-bg {
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.2), transparent 70%), linear-gradient(to bottom, #0a0a1a, #111827);
+    }
+  </style>
 </head>
-<body>
-
-    <!-- Navigation -->
-    <nav class="container mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <img src="https://cdn.discordapp.com/attachments/1363921041411539266/1363936617537999048/file_000000004364622fa7f4d73af03964b4_conversation_id680683d9-451c-8004-8e32-f9a19178f62bmessage_id7ce5d84e-c61b-4a84-984b-5d036ef2e1c8.png" class="w-8 h-8" alt="Logo">
-                <span class="text-xl font-semibold flex items-center">
-                    RavenShop 
-                    <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" fill="#5865F2">
-                        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                    </svg>
-                </span>
-            </div>
-            <div class="flex items-center space-x-8">
-                <a href="#vouches" class="text-gray-300 hover:text-white transition">Vouches</a>
-                <a href="#stats" class="text-gray-300 hover:text-white transition">Stats</a>
-                <a href="https://discord.gg/S5K4q3fnFm" target="_blank" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition">Join Discord</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="container mx-auto px-6 py-20 text-center">
-        <h1 class="text-5xl font-bold mb-6 gradient-text">Premium Services &<br>Trusted Solutions</h1>
-        <p class="text-lg text-gray-400 mb-10">24/7 Support • Fast Delivery • Professional Service</p>
-        <div class="flex justify-center space-x-4">
-            <a href="#vouches" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg transition">View Vouches</a>
-            <a href="https://raven.shop" class="border border-purple-600 hover:bg-purple-600/10 px-6 py-3 rounded-lg transition">Visit Shop</a>
-            <a href="https://discord.gg/S5K4q3fnFm" class="flex items-center border border-[#5865F2] hover:bg-[#5865F2]/10 px-6 py-3 rounded-lg transition text-[#5865F2]">
-                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" fill="#5865F2">
-                    <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                </svg>
-                Join Discord
-            </a>
-        </div>
+<body class="overflow-x-hidden">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 backdrop-blur bg-opacity-20 bg-black/50 border-b border-purple-800">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <!-- Correct Falcon Logo -->
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="w-8 h-8" alt="Falcon Logo">
+        <span class="text-2xl font-bold text-white">RavenShop</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-6 text-sm">
+        <a href="#vouches" class="text-gray-300 hover:text-white">Vouches</a>
+        <a href="#stats" class="text-gray-300 hover:text-white">Stats</a>
+        <a href="https://discord.gg/S5K4q3fnFm" class="glow-btn px-4 py-2 rounded-lg text-white font-semibold">Join Discord</a>
+      </div>
     </div>
+  </nav>
 
-    <!-- Top Vouchers Section -->
-    <div id="stats" class="container mx-auto px-6 py-16">
-        <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Top Vouchers</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for voucher in top_vouchers %}
-            <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
-                <div class="flex flex-col items-center text-center">
-                    <div class="avatar-wrapper w-20 h-20 mb-4">
-                        <img src="{{ voucher.discord_avatar_url }}" class="avatar-image" alt="Avatar" 
-                             onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
-                    </div>
-                    <h3 class="font-semibold text-lg">{{ voucher.user_name }}</h3>
-                    <p class="text-gray-400 text-sm mb-3">{{ voucher.vouch_count }} vouches</p>
-                    <div class="flex items-center space-x-2">
-                        <span class="font-bold text-xl">{{ voucher.score }}</span>
-                        <span class="text-gray-400 text-sm">{{ voucher.currency }}</span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+  <!-- Hero -->
+  <section class="hero-bg py-28 relative overflow-hidden">
+    <div class="absolute w-96 h-96 bg-purple-700 rounded-full blur-3xl opacity-30 -z-10 top-10 -left-24 animate-pulse"></div>
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-6xl font-extrabold mb-6 leading-tight gradient-text">Premium Services &<br>Trusted Solutions</h1>
+      <p class="text-lg text-gray-300 max-w-xl mx-auto mb-10">24/7 Support • Fast Delivery • Professional Service that raises the bar.</p>
+      <div class="flex justify-center gap-4">
+        <a href="#vouches" class="glow-btn px-6 py-3 text-white rounded-full font-semibold hover:scale-105 transition">View Vouches</a>
+        <a href="https://raven.shop" class="px-6 py-3 rounded-full border border-purple-600 text-purple-300 hover:bg-purple-600/20 transition">Visit Shop</a>
+      </div>
     </div>
+  </section>
 
-    <!-- Recent Vouches Section -->
-    <div id="vouches" class="container mx-auto px-6 py-16">
-        <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Recent Vouches</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for vouch in (recent_vouches|sort(attribute='timestamp', reverse=true))[:9] %}
-            <div class="bg-[#1a1a2e]/50 rounded-xl p-6">
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="avatar-wrapper w-12 h-12">
-                        <img src="{{ vouch.user_avatar }}" class="avatar-image" alt="{{ vouch.user_name }}"
-                             onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
-                    </div>
-                    <div>
-                        <h3 class="font-semibold">{{ vouch.user_name }}</h3>
-                        <p class="text-sm text-gray-400">{{ vouch.display_time if vouch.display_time is defined else vouch.timestamp }}</p>
-                    </div>
-                </div>
-                <div class="stars-container mb-4">
-                    {% for _ in range(vouch.stars) %}⭐{% endfor %}
-                </div>
-                <p class="text-gray-300">{{ vouch.message }}</p>
-            </div>
-            {% endfor %}
+  <!-- Top Vouchers -->
+  <section id="stats" class="container mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold text-center gradient-text mb-16">Top Vouchers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      {% for voucher in top_vouchers %}
+      <div class="bg-[#1a1a2e]/60 backdrop-blur rounded-xl p-6 shadow-lg hover:shadow-purple-800 transition">
+        <div class="flex flex-col items-center text-center">
+          <div class="avatar-wrapper w-20 h-20 mb-4">
+            <img src="{{ voucher.discord_avatar_url }}" class="avatar-image" alt="Avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
+          </div>
+          <h3 class="font-semibold text-lg">{{ voucher.user_name }}</h3>
+          <p class="text-gray-400 text-sm mb-3">{{ voucher.vouch_count }} vouches</p>
+          <div class="text-purple-300 text-xl font-bold">{{ voucher.score }} <span class="text-sm text-gray-400">{{ voucher.currency }}</span></div>
         </div>
+      </div>
+      {% endfor %}
     </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="py-8 text-center text-gray-400">
-        <p>© 2025 RavenShop • All rights reserved</p>
-    </footer>
+  <!-- Recent Vouches -->
+  <section id="vouches" class="container mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold text-center gradient-text mb-16">Recent Vouches</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      {% for vouch in (recent_vouches|sort(attribute='timestamp', reverse=true))[:9] %}
+      <div class="bg-[#1a1a2e]/60 rounded-xl p-6 shadow-md hover:shadow-purple-700 transition">
+        <div class="flex items-center space-x-4 mb-4">
+          <div class="avatar-wrapper w-12 h-12">
+            <img src="{{ vouch.user_avatar }}" class="avatar-image" alt="{{ vouch.user_name }}" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
+          </div>
+          <div>
+            <h3 class="font-semibold">{{ vouch.user_name }}</h3>
+            <p class="text-sm text-gray-400">{{ vouch.display_time if vouch.display_time is defined else vouch.timestamp }}</p>
+          </div>
+        </div>
+        <div class="stars-container mb-3 text-yellow-400">
+          {% for _ in range(vouch.stars) %}⭐{% endfor %}
+        </div>
+        <p class="text-gray-300">{{ vouch.message }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 
+  <!-- Footer -->
+  <footer class="py-10 text-center text-gray-500 text-sm border-t border-gray-800">
+    <p>© 2025 RavenShop • All rights reserved</p>
+  </footer>
 </body>
 </html>
