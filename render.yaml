@@ -9,7 +9,7 @@ services:
       - key: DISCORD_TOKEN
         sync: false
       - key: DATABASE_URL
-        value: postgresql://ravenshop_db_user:nEeZ5MHoo5eEw7FLarHegSv4BNlY6Ovj@dpg-d08sks9r0fns73doqolg-a/ravenshop_db
+        value: postgresql://ravenshop-db_owner:npg_GMzymHeF1a7j@ep-lingering-tooth-a88ay494-pooler.eastus2.azure.neon.tech/ravenshop-db?sslmode=require
     branches:
       - main
   
